@@ -8,6 +8,7 @@
 // import './styles/styles.css'
 // import './styles/less.less'
 import './styles/style.scss'
+import script from './scripts/script'
 
 // index.js
 // создание свойства класса без конструктора
