@@ -100,9 +100,9 @@ const plugins = () => {
     })
   ]
 
-  if (isProd) {
-    base.push(new BundleAnalyzerPlugin())
-  }
+  // if (isProd) {
+  //   base.push(new BundleAnalyzerPlugin())
+  // }
 
   return base
 }
@@ -125,7 +125,7 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
-    port: 3200,
+    port: 8080,
     hot: isDev,
   },
   devtool: isDev ? 'source-map' : '',
