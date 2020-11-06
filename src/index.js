@@ -8,10 +8,12 @@ let clickCounter;
 let oldzx = -1;
 let oldzy = -1;
 
-// проверка решаемости
+// проверка хода
 function getPossibles() {
-  let ii; let jj; const cx = [-1, 0, 1, 0]; const
-    cy = [0, -1, 0, 1];
+  let ii;
+  let jj;
+  const cx = [-1, 0, 1, 0];
+  const cy = [0, -1, 0, 1];
   possibles = [];
   for (let i = 0; i < 4; i += 1) {
     ii = zx + cx[i]; jj = zy + cy[i];
@@ -20,26 +22,52 @@ function getPossibles() {
   }
 }
 
-// randomize
-function shuffle() {
-  let v = 0; let
-    t;
-  /* eslint no-constant-condition: ["error", { "checkLoops": false }] */
-  do {
-    getPossibles();
-    while (true) {
-      t = possibles[Math.floor(Math.random() * possibles.length)];
-      // console.log(t.x, oldzx, t.y, oldzy);
-      if (t.x !== oldzx || t.y !== oldzy) break;
+// вывод
+function updateBtns() {
+  let b;
+  let v;
+  let id;
+  for (let j = 0; j < 4; j += 1) {
+    for (let i = 0; i < 4; i += 1) {
+      id = `btn${i + j * 4}`;
+      b = document.getElementById(id);
+      v = board[i][j];
+      if (v < 16) {
+        b.innerHTML = (`${v}`);
+        b.className = 'button';
+      } else {
+        b.innerHTML = ('');
+        b.className = 'empty';
+      }
     }
-    oldzx = zx; oldzy = zy;
-    board[zx][zy] = board[t.x][t.y];
-    zx = t.x; zy = t.y;
-    board[zx][zy] = 16;
-  } while (++v < 200);
+  }
+  clickCounter.innerHTML = `Ходов: ${clicks}`;
 }
+
+// randomize
+// function shuffle() {
+//   let v = 0;
+//   let t;
+//   do {
+//     getPossibles();
+//     while (true) {
+//       t = possibles[Math.floor(Math.random() * possibles.length)];
+//       // console.log(t.x, oldzx, t.y, oldzy);
+//       if (t.x !== oldzx || t.y !== oldzy) break;
+//     }
+//     oldzx = zx; oldzy = zy;
+//     board[zx][zy] = board[t.x][t.y];
+//     zx = t.x; zy = t.y;
+//     board[zx][zy] = 16;
+//   } while (++v < 200);
+// }
+function mixing() {
+
+}
+
 function restart() {
-  shuffle();
+  // shuffle();
+  mixing();
   clicks = 0;
   updateBtns();
 }
@@ -55,8 +83,9 @@ function checkFinished() {
 }
 function btnHandle(e) {
   getPossibles();
-  const c = e.target.i; const r = e.target.j; let
-    p = -1;
+  const c = e.target.i;
+  const r = e.target.j;
+  let p = -1;
   for (let i = 0; i < possibles.length; i += 1) {
     if (possibles[i].x === c && possibles[i].y === r) {
       p = i;
@@ -78,6 +107,7 @@ function btnHandle(e) {
     }
   }
 }
+
 function createBoard() {
   board = new Array(4);
   for (let i = 0; i < 4; i += 1) {
@@ -117,26 +147,7 @@ function start() {
   restart();
 }
 
-// output
-function updateBtns() {
-  let b; let v; let
-    id;
-  for (let j = 0; j < 4; j += 1) {
-    for (let i = 0; i < 4; i += 1) {
-      id = `btn${i + j * 4}`;
-      b = document.getElementById(id);
-      v = board[i][j];
-      if (v < 16) {
-        b.innerHTML = (`${v}`);
-        b.className = 'button';
-      } else {
-        b.innerHTML = ('');
-        b.className = 'empty';
-      }
-    }
-  }
-  clickCounter.innerHTML = `Ходов: ${clicks}`;
-}
+
 
 // run
 window.onload = start();
