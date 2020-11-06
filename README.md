@@ -2,5 +2,4 @@
   * Vanilla js
   * SCSS
   * Canvas
-  * Webpack
   * Eslint
