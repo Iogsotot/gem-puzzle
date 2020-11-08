@@ -21,7 +21,7 @@ function getPossibles() {
     if (ii < 0 || ii > 3 || jj < 0 || jj > 3) continue;
     possibles.push({ x: ii, y: jj });
   }
-  console.log(`after${possibles}`);
+  // console.log(`after${possibles}`);
 }
 
 // контент и перемещение ячеек
@@ -47,21 +47,21 @@ function updateBtns() {
 }
 
 function mixing() {
-  let t;
+  let turn;
   // permutation - количество перестановок
-  for (let permutation = 0; permutation < 2; permutation += 1) {
+  for (let permutation = 0; permutation < 5; permutation += 1) {
     getPossibles();
-    t = possibles[Math.floor(Math.random() * possibles.length)];
-    while (t.x === oldzx || t.y === oldzy) {
-      t = possibles[Math.floor(Math.random() * possibles.length)];
-      // console.log(t.x, oldzx, t.y, oldzy);
+    turn = possibles[Math.floor(Math.random() * possibles.length)];
+    while (turn.x === oldzx || turn.y === oldzy) {
+      turn = possibles[Math.floor(Math.random() * possibles.length)];
     }
     oldzx = zx;
     oldzy = zy;
-    board[zx][zy] = board[t.x][t.y];
-    zx = t.x;
-    zy = t.y;
+    board[zx][zy] = board[turn.x][turn.y];
+    zx = turn.x;
+    zy = turn.y;
     board[zx][zy] = 16;
+    console.log(turn.x, oldzx, turn.y, oldzy);
   }
 }
 
@@ -70,32 +70,35 @@ function restart() {
   clicks = 0;
   updateBtns();
 }
-function checkFinished() {
-  let a = 0;
-  for (let j = 0; j < 4; j += 1) {
-    for (let i = 0; i < 4; i += 1) {
-      if (board[i][j] < a) return false;
-      a = board[i][j];
+function checkFinished(boardSize = 4) {
+  let maxCellValue = 0;
+  for (let j = 0; j < boardSize; j += 1) {
+    for (let i = 0; i < boardSize; i += 1) {
+      if (board[i][j] < maxCellValue) return false;
+      maxCellValue = board[i][j];
     }
   }
   return true;
 }
 function btnHandle(e) {
   getPossibles();
-  const c = e.target.i;
-  const r = e.target.j;
-  let p = -1;
+  const column = e.target.i;
+  const row = e.target.j;
+  let clickedCell = -1;
+  // можно ли передвинуть в тыкнутое?
   for (let i = 0; i < possibles.length; i += 1) {
-    if (possibles[i].x === c && possibles[i].y === r) {
-      p = i;
+    if (possibles[i].x === column && possibles[i].y === row) {
+      clickedCell = i;
       break;
     }
   }
-  if (p > -1) {
+  if (clickedCell > -1) {
     clicks += 1;
-    const t = possibles[p];
-    board[zx][zy] = board[t.x][t.y];
-    zx = t.x; zy = t.y;
+    const emptyCell = possibles[clickedCell];
+    // console.log(emptyCell);
+    board[zx][zy] = board[emptyCell.x][emptyCell.y];
+    zx = emptyCell.x;
+    zy = emptyCell.y;
     board[zx][zy] = 16;
     updateBtns();
     // выиграл?
