@@ -16,57 +16,56 @@ function getPossibles() {
   const cy = [0, -1, 0, 1];
   possibles = [];
   for (let i = 0; i < 4; i += 1) {
-    ii = zx + cx[i]; jj = zy + cy[i];
+    ii = zx + cx[i];
+    jj = zy + cy[i];
     if (ii < 0 || ii > 3 || jj < 0 || jj > 3) continue;
     possibles.push({ x: ii, y: jj });
   }
+  console.log(`after${possibles}`);
 }
 
-// вывод
+// контент и перемещение ячеек
 function updateBtns() {
-  let b;
-  let v;
+  let cellById;
+  let cellNumber;
   let id;
   for (let j = 0; j < 4; j += 1) {
     for (let i = 0; i < 4; i += 1) {
-      id = `btn${i + j * 4}`;
-      b = document.getElementById(id);
-      v = board[i][j];
-      if (v < 16) {
-        b.innerHTML = (`${v}`);
-        b.className = 'button';
+      id = `cell${i + j * 4}`;
+      cellById = document.getElementById(id);
+      cellNumber = board[i][j];
+      if (cellNumber < 16) {
+        cellById.innerHTML = (`${cellNumber}`);
+        cellById.className = 'cell';
       } else {
-        b.innerHTML = ('');
-        b.className = 'empty';
+        cellById.innerHTML = ('');
+        cellById.className = 'empty';
       }
     }
   }
   clickCounter.innerHTML = `Ходов: ${clicks}`;
 }
 
-// randomize
-// function shuffle() {
-//   let v = 0;
-//   let t;
-//   do {
-//     getPossibles();
-//     while (true) {
-//       t = possibles[Math.floor(Math.random() * possibles.length)];
-//       // console.log(t.x, oldzx, t.y, oldzy);
-//       if (t.x !== oldzx || t.y !== oldzy) break;
-//     }
-//     oldzx = zx; oldzy = zy;
-//     board[zx][zy] = board[t.x][t.y];
-//     zx = t.x; zy = t.y;
-//     board[zx][zy] = 16;
-//   } while (++v < 200);
-// }
 function mixing() {
-
+  let t;
+  // permutation - количество перестановок
+  for (let permutation = 0; permutation < 2; permutation += 1) {
+    getPossibles();
+    t = possibles[Math.floor(Math.random() * possibles.length)];
+    while (t.x === oldzx || t.y === oldzy) {
+      t = possibles[Math.floor(Math.random() * possibles.length)];
+      // console.log(t.x, oldzx, t.y, oldzy);
+    }
+    oldzx = zx;
+    oldzy = zy;
+    board[zx][zy] = board[t.x][t.y];
+    zx = t.x;
+    zy = t.y;
+    board[zx][zy] = 16;
+  }
 }
 
 function restart() {
-  // shuffle();
   mixing();
   clicks = 0;
   updateBtns();
@@ -99,6 +98,7 @@ function btnHandle(e) {
     zx = t.x; zy = t.y;
     board[zx][zy] = 16;
     updateBtns();
+    // выиграл?
     if (checkFinished()) {
       setTimeout(() => {
         console.log('ай! маладэц!');
@@ -108,46 +108,50 @@ function btnHandle(e) {
   }
 }
 
-function createBoard() {
-  board = new Array(4);
-  for (let i = 0; i < 4; i += 1) {
-    board[i] = new Array(4);
+// функция создания доски (по умолчания - размер 4*4)
+function createBoard(boardSize = 4) {
+  board = new Array(boardSize);
+  // создаём колонки + изначальное заполнение
+  for (let i = 0; i < boardSize; i += 1) {
+    board[i] = new Array(boardSize);
   }
-  for (let j = 0; j < 4; j += 1) {
-    for (let i = 0; i < 4; i += 1) {
-      board[i][j] = (i + j * 4) + 1;
+  for (let j = 0; j < boardSize; j += 1) {
+    for (let i = 0; i < boardSize; i += 1) {
+      board[i][j] = (i + j * boardSize) + 1;
     }
   }
   zx = 3;
   zy = 3;
   board[zx][zy] = 16;
 }
-function createBtns() {
-  let b;
-  const d = document.createElement('div');
-  d.className += 'board';
-  document.body.appendChild(d);
-  for (let j = 0; j < 4; j += 1) {
-    for (let i = 0; i < 4; i += 1) {
-      b = document.createElement('button');
-      b.id = `btn${i + j * 4}`;
-      b.i = i; b.j = j;
-      b.addEventListener('click', btnHandle, false);
-      b.appendChild(document.createTextNode(''));
-      d.appendChild(b);
+function createBtns(boardSize = 4) {
+  let cellEl;
+  const boardEl = document.createElement('div');
+  boardEl.className += 'board';
+  document.body.appendChild(boardEl);
+  for (let j = 0; j < boardSize; j += 1) {
+    for (let i = 0; i < boardSize; i += 1) {
+      // тут создаём костяшки
+      cellEl = document.createElement('div');
+      cellEl.id = `cell${i + j * boardSize}`;
+      cellEl.i = i;
+      cellEl.j = j;
+      cellEl.addEventListener('click', btnHandle, false);
+      cellEl.appendChild(document.createTextNode(''));
+      boardEl.appendChild(cellEl);
     }
   }
+  // тексты, рекорды, счётчик и тд
   clickCounter = document.createElement('p');
   clickCounter.className += 'txt';
   document.body.appendChild(clickCounter);
 }
+// начало игры, обновление и тд
 function start() {
   createBtns();
   createBoard();
   restart();
 }
-
-
 
 // run
 window.onload = start();
