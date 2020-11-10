@@ -3,3 +3,9 @@
   * SCSS
   * Canvas
   * Eslint
+  
+# Пятнашки
+  * Vanilla js
+  * SCSS
+  * Canvas
+  * Eslint
