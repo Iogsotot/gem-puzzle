@@ -10,7 +10,7 @@ body {
   padding: 0;
   margin: 0;
   padding-top: 8vh;
-  background: #222;
+  background: wheat;
   color: #111;
 }
 .txt {
@@ -24,7 +24,7 @@ body {
   width: 33vh;
   height: 33vh;
 }
-.button,
+.cell,
 .empty {
   border: 0;
   font-size: 3.5vh;
@@ -41,6 +41,7 @@ body {
   float: left;
 }
 .empty {
-  background: #333;
-  border: 1px solid #111;
+  background: transparent;
+  border: 3px dashed grey;
+  // transition: border 80ms linear;
 }
