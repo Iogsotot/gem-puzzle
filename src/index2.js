@@ -22,7 +22,6 @@ function createHtml() {
   boardEl.className += 'board';
 
   function createCell(cellNumber, cellClass) {
-    if (cellClass === 'empty') cellNumber = '';
     const cellTemplate = `
     <div class="${cellClass}">${cellNumber}</div>
     `;
@@ -37,7 +36,10 @@ function createHtml() {
       else {
         cellClass = 'empty';
       }
-      boardEl.innerHTML += createCell(board[j][g], cellClass);
+      let cellNumber = board[j][g];
+      // тут мы создаём пустую ячейку
+      if (cellNumber === cellMax) cellNumber = '';
+      boardEl.innerHTML += createCell(cellNumber, cellClass);
     }
   }
 
