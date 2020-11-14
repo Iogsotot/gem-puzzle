@@ -117,7 +117,7 @@ function btnHandle(e) {
     if (checkFinished()) {
       setTimeout(() => {
         console.log('ай! маладэц!');
-        restart();
+        // restart();
       }, 1);
     }
   }

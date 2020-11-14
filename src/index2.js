@@ -5,7 +5,7 @@ const clickCounter = 0;
 let cells;
 let emptyCellX;
 let emptyCellY;
-const possibles = [];
+let possibles = [];
 const history = [];
 let oldzx = -1;
 let oldzy = -1;
@@ -25,21 +25,25 @@ function createBoard(size = 4) {
 
 // проверка хода
 function getPossibles() {
-  for (let x = 0; x < board.length; x += 1) {
-    for (let y = 0; y < board.length; y += 1) {
-      if (board[x][y] === cellMax) {
+  possibles = [];
+  // получаем координаты пустой ячейки
+  for (let y = 0; y < board.length; y += 1) {
+    for (let x = 0; x < board.length; x += 1) {
+      if (board[y][x] === cellMax) {
         emptyCellX = x;
         emptyCellY = y;
       }
     }
   }
+  
   let px;
   let py;
-  const cx = [-1, 0, 1, 0];
-  const cy = [0, -1, 0, 1];
+  const cy = [-1, 0, 1, 0];
+  const cx = [0, -1, 0, 1];
   for (let i = 0; i < boardSize; i += 1) {
     px = emptyCellX + cx[i];
     py = emptyCellY + cy[i];
+    console.log(emptyCellY, emptyCellX);
     // console.log(px, py);
     if ((px >= 0 || px < 3 || py >= 0 || py < 3) && px < 4 && py < 4) {
       possibles.push({ x: px, y: py });
@@ -103,22 +107,24 @@ function cellMixing() {
   for (let permutation = 0; permutation < 3; permutation += 1) {
     getPossibles();
     turn = possibles[Math.floor(Math.random() * possibles.length)];
-    while (turn.x === oldzx || turn.y === oldzy) {
-      turn = possibles[Math.floor(Math.random() * possibles.length)];
-    }
+    // while (turn.x === oldzx || turn.y === oldzy) {
+    //   turn = possibles[Math.floor(Math.random() * possibles.length)];
+    // }
     oldzx = emptyCellX;
     oldzy = emptyCellY;
     board[emptyCellX][emptyCellY] = board[turn.x][turn.y];
+    emptyCellY = turn.y;
+    emptyCellX = turn.x;
     board[turn.x][turn.y] = cellMax;
     history.push(turn.x, turn.y);
-    updateBoard();
   }
+  updateBoard();
 }
 
 // автовыигрыш
-function autoWin() { 
-  boardE
-}
+// function autoWin() { 
+//  board[emptyCellX][emptyCellY]
+// }
 
 // новая игра
 function start(size = 4) {
