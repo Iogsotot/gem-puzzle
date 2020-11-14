@@ -51,3 +51,20 @@ body {
   // color: transparent;
   // transition: border 80ms linear;
 }
+
+.autoWin {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 7.25vh;
+  border: 0;
+  font-size: 3.5vh;
+  margin: 0.5vh;
+  padding: 0;
+  line-height: 5vh;
+  vertical-align: middle;
+  background: #fff;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+  float: left;
+}

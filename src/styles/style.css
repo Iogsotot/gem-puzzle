@@ -62,4 +62,25 @@ body {
   background: transparent;
   border: 3px dashed grey;
 }
+
+.autoWin {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  -ms-flex-preferred-size: 7.25vh;
+      flex-basis: 7.25vh;
+  border: 0;
+  font-size: 3.5vh;
+  margin: 0.5vh;
+  padding: 0;
+  line-height: 5vh;
+  vertical-align: middle;
+  background: #fff;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+  float: left;
+}
 /*# sourceMappingURL=style.css.map */
