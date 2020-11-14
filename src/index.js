@@ -7,6 +7,7 @@ let possibles;
 let clickCounter;
 let oldzx = -1;
 let oldzy = -1;
+let history = [];
 
 // проверка хода
 function getPossibles() {
@@ -61,15 +62,25 @@ function mixing() {
     zx = turn.x;
     zy = turn.y;
     board[zx][zy] = 16;
-    console.log(turn.x, oldzx, turn.y, oldzy);
+    history.push(turn.x, turn.y);
   }
+  console.log(history);
+}
+
+// анимация автоматического сбора
+function autoWin() {
+  zy = history.pop();
+  zx = history.pop();
+  updateBtns();
 }
 
 function restart() {
+  history = [];
   mixing();
   clicks = 0;
   updateBtns();
 }
+
 function checkFinished(boardSize = 4) {
   let maxCellValue = 0;
   for (let j = 0; j < boardSize; j += 1) {
@@ -80,6 +91,7 @@ function checkFinished(boardSize = 4) {
   }
   return true;
 }
+
 function btnHandle(e) {
   getPossibles();
   const column = e.target.i;
@@ -105,7 +117,7 @@ function btnHandle(e) {
     if (checkFinished()) {
       setTimeout(() => {
         console.log('ай! маладэц!');
-        restart();
+        // restart();
       }, 1);
     }
   }
@@ -127,6 +139,7 @@ function createBoard(boardSize = 4) {
   zy = 3;
   board[zx][zy] = 16;
 }
+
 function createBtns(boardSize = 4) {
   let cellEl;
   const boardEl = document.createElement('div');
@@ -149,6 +162,7 @@ function createBtns(boardSize = 4) {
   clickCounter.className += 'txt';
   document.body.appendChild(clickCounter);
 }
+
 // начало игры, обновление и тд
 function start() {
   createBtns();

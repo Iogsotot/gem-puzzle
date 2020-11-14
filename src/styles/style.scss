@@ -19,6 +19,8 @@ body {
   font-size: 5vh;
 }
 .board {
+  display: flex;
+  flex-wrap: wrap;
   padding: 0;
   margin: auto;
   width: 33vh;
@@ -26,6 +28,9 @@ body {
 }
 .cell,
 .empty {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 7.25vh;
   border: 0;
   font-size: 3.5vh;
   margin: 0.5vh;
@@ -43,5 +48,6 @@ body {
 .empty {
   background: transparent;
   border: 3px dashed grey;
+  // color: transparent;
   // transition: border 80ms linear;
 }
