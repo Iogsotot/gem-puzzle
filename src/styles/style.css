@@ -23,6 +23,11 @@ body {
 }
 
 .board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 0;
   margin: auto;
   width: 33vh;
@@ -31,6 +36,13 @@ body {
 
 .cell,
 .empty {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  -ms-flex-preferred-size: 7.25vh;
+      flex-basis: 7.25vh;
   border: 0;
   font-size: 3.5vh;
   margin: 0.5vh;
