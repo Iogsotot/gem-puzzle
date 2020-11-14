@@ -115,6 +115,7 @@ function btnHandle(e) {
     emptyCellX = emptyCell.x;
     emptyCellY = emptyCell.y;
     board[emptyCellY][emptyCellX] = cellMax;
+    history.push(emptyCellX, emptyCellY);
     updateBoard();
     // выиграл?
     if (checkFinished()) {
@@ -157,6 +158,9 @@ function cellMixing() {
 // автовыигрыш
 function autoWin() {
   console.log(history);
+  emptyCellY = history.pop();
+  emptyCellX = history.pop();
+  // updateBoard();
 }
 
 // новая игра
