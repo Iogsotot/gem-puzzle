@@ -115,7 +115,7 @@ function btnHandle(e) {
     emptyCellX = emptyCell.x;
     emptyCellY = emptyCell.y;
     board[emptyCellY][emptyCellX] = cellMax;
-    history.push(emptyCellX, emptyCellY);
+    history.push([emptyCellX, emptyCellY]);
     updateBoard();
     // выиграл?
     if (checkFinished()) {
@@ -150,7 +150,7 @@ function cellMixing() {
     emptyCellY = turn.y;
     emptyCellX = turn.x;
     board[turn.y][turn.x] = cellMax;
-    history.push(turn.x, turn.y);
+    history.push([turn.x, turn.y]);
   }
   updateBoard();
 }
@@ -158,9 +158,19 @@ function cellMixing() {
 // автовыигрыш
 function autoWin() {
   console.log(history);
-  emptyCellY = history.pop();
-  emptyCellX = history.pop();
+  for (let i = history.length; i === 0; i--) {
+    let historyCell = history[i];
+    cells = document.querySelectorAll('.cell');
+
+  }
+
   // updateBoard();
+}
+
+// добавляем класс active
+function addActive() {
+  getPossibles();
+  
 }
 
 // новая игра
@@ -174,6 +184,7 @@ function start(size = 4) {
   cells.forEach((cell) => {
     cell.addEventListener('click', btnHandle, false);
   });
+  addActive();
 }
 
 function restart() {
@@ -196,3 +207,48 @@ function checkFinished(size = 4) {
 
 // run
 window.onload = start(boardSize);
+
+// dragNdrop
+const fill = document.querySelector('.active');
+const empty = document.querySelector('.empty');
+
+// Fill listeners
+fill.addEventListener('dragstart', dragStart);
+fill.addEventListener('dragend', dragEnd);
+
+// Loop through empty boxes and add listeners
+
+empty.addEventListener('dragover', dragOver);
+empty.addEventListener('dragenter', dragEnter);
+empty.addEventListener('dragleave', dragLeave);
+empty.addEventListener('drop', dragDrop);
+
+// Drag Functions
+
+function dragStart() {
+  this.className += ' hold';
+  // eslint-disable-next-line no-return-assign
+  setTimeout(() => (this.className = 'invisible'), 0);
+}
+
+function dragEnd() {
+  this.className = 'fill';
+}
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function dragEnter(e) {
+  e.preventDefault();
+  this.className += ' hovered';
+}
+
+function dragLeave() {
+  this.className = 'empty';
+}
+
+function dragDrop() {
+  this.className = 'empty';
+  this.append(fill);
+}
