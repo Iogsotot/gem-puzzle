@@ -15,5 +15,15 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-console': 'off',
+    'no-plusplus': ['error',
+      {
+        allowForLoopAfterthoughts: true,
+      }],
+    'no-use-before-define': ['error',
+      {
+        functions: false,
+      }],
+    'import/extensions': 'warn',
   },
 };
