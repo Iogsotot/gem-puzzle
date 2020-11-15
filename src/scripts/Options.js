@@ -1,4 +1,4 @@
-export default function createBoardSizeEl() {
+function createBoardSizeEl() {
   const boardSizeEl = `
   <input 
     class="board_size" 
@@ -9,6 +9,19 @@ export default function createBoardSizeEl() {
     spellcheck="false"
   >
   `;
-  
+
   return boardSizeEl;
 }
+
+function createNewGame() {
+  const newGameBtn = `
+  <button 
+    class="btn btn--start" 
+    type="submit">
+    Start game
+  </button>
+  `;
+  return newGameBtn;
+}
+
+export { createBoardSizeEl, createNewGame };

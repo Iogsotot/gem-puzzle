@@ -1,9 +1,9 @@
 import Cell from './Cell.js';
 
 export default class PicturePuzzle {
-  constructor(el, imageSrc, width) {
+  constructor(el, imageSrc, width, size = 3) {
     this.parentEl = el;
-    this.boardSize = 3;
+    this.boardSize = size;
     this.imageSrc = imageSrc;
     this.width = width;
     this.cells = [];
@@ -29,6 +29,7 @@ export default class PicturePuzzle {
   // eslint-disable-next-line class-methods-use-this
   createWrapper() {
     const div = document.createElement('div');
+    div.classList.add('board');
     div.style.position = 'relative';
     div.style.margin = '0 auto';
     return div;
