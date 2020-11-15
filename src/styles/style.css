@@ -23,11 +23,6 @@ body {
 }
 
 .board {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   padding: 0;
   margin: auto;
   width: 33vh;
@@ -36,26 +31,18 @@ body {
 
 .cell,
 .empty {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -ms-flex-negative: 1;
-      flex-shrink: 1;
-  -ms-flex-preferred-size: 7.25vh;
-      flex-basis: 7.25vh;
   border: 0;
   font-size: 3.5vh;
   margin: 0.5vh;
   padding: 0;
   height: 6vh;
   width: 7.25vh;
-  line-height: 5vh;
+  line-height: 200px;
   vertical-align: middle;
-  background: #fff;
+  text-shadow: rgba(255, 255, 255, 0.7) 1px 1px 1px, #fff -1px -1px 1px, #fff -1px 1px 1px, #fff 1px -1px 1px;
   text-align: center;
   border-radius: 3px;
   cursor: pointer;
-  float: left;
 }
 
 .empty {
@@ -81,6 +68,24 @@ body {
   text-align: center;
   border-radius: 3px;
   cursor: pointer;
-  float: left;
+}
+
+.fill {
+  background-image: url("https://source.unsplash.com/random/150x150");
+  position: relative;
+  height: 150px;
+  width: 150px;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+}
+
+.hold {
+  border: solid 5px #ccc;
+}
+
+.hovered {
+  background: #f4f4f4;
+  border-style: dashed;
 }
 /*# sourceMappingURL=style.css.map */

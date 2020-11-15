@@ -3,7 +3,7 @@ import Cell from './Cell.js';
 export default class PicturePuzzle {
   constructor(el, imageSrc, width) {
     this.parentEl = el;
-    this.dimension = 3;
+    this.boardSize = 3;
     this.imageSrc = imageSrc;
     this.width = width;
     this.cells = [];
@@ -35,7 +35,7 @@ export default class PicturePuzzle {
   }
 
   setup() {
-    for (let i = 0; i < this.dimension * this.dimension - 1; i++) {
+    for (let i = 0; i < this.boardSize * this.boardSize - 1; i++) {
       this.cells.push(new Cell(this, i));
     }
   }
