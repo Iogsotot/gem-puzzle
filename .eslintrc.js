@@ -24,5 +24,6 @@ module.exports = {
       {
         functions: false,
       }],
+    'import/extensions': 'warn',
   },
 };
