@@ -58,6 +58,27 @@ export default class PicturePuzzle {
     this.shuffling = false;
   }
 
+  getPossiblesForCell(i) {
+    const currentCellIndex = this.findPosition(this.index);
+    const emptyCellIndex = this.findEmpty();
+    const { x, y } = this.getXY(currentCellIndex);
+    const { x: emptyX, y: emptyY } = this.getXY(emptyCellIndex);
+
+    if ((x === emptyX || y === emptyY)
+        && (Math.abs(x - emptyX) === 1 || Math.abs(y - emptyY) === 1)) {
+          
+        }
+  }
+
+  controlledShuffle() {
+    this.shuffling = true;
+    for (let i = this.permutations; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      this.swapCells(i, j);
+    }
+    this.shuffling = false;
+  }
+
   swapCells(i, j, animate) {
     this.cells[i].setPosition(j, animate, i);
     this.cells[j].setPosition(i);
@@ -67,6 +88,7 @@ export default class PicturePuzzle {
         this.onFinished.call(this);
       }
     }
+    console.log(this.cells);
   }
 
   isAssembled() {

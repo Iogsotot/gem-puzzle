@@ -27,7 +27,6 @@ wrapper.innerHTML += boardWrapperTemplate;
 // create popup
 addPopup();
 const popup = document.querySelector('.popup');
-popup.classList.add('active');
 
 const newGameEl = document.querySelector('.btn--start');
 newGameEl.addEventListener('click', newGame);
@@ -35,6 +34,7 @@ newGameEl.addEventListener('click', newGame);
 //
 // constructor(el, imageSrc, width, size)
 function newGame() {
+  popup.classList.remove('active');
   const sizeEl = document.querySelector('.board_size');
   const picturePuzzle = new PicturePuzzle(
     document.querySelector('.board-wrapper'),
@@ -47,6 +47,7 @@ function newGame() {
   };
   picturePuzzle.onFinished = function () {
     setTimeout(() => {
+      popup.classList.add('active');
       popup.classList.add('open');
       this.el.classList.add('blur');
     }, 700);
