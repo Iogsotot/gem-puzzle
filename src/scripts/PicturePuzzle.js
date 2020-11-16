@@ -36,8 +36,25 @@ export default class PicturePuzzle {
   }
 
   setup() {
-    for (let i = 0; i < this.boardSize * this.boardSize - 1; i++) {
+    for (let i = 0; i < this.boardSize * this.boardSize; i++) {
       this.cells.push(new Cell(this, i));
     }
+    this.shuffle();
+    console.log(this.cells);
+  }
+
+  // true shuffle
+  shuffle() {
+    let j;
+    let temp;
+    for (let i = this.cells.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = this.cells[j];
+      this.cells[j] = this.cells[i];
+      this.cells[i] = temp;
+      this.cells[i].setPosition(i);
+      this.cells[j].setPosition(j);
+    }
+    return this.cells;
   }
 }
