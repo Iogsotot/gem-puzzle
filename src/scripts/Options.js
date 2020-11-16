@@ -3,7 +3,7 @@ function createBoardSizeEl() {
   <input 
     class="board_size" 
     type="text" 
-    value="3"
+    value="5"
     maxlength="20"
     size="20"
     spellcheck="false"

@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all 200ms linear;
+  transition: all 500ms linear;
 }
 
 html,
@@ -20,8 +20,8 @@ body {
   font-size: 5vh;
 }
 .board {
-  // display: flex;
-  // flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
   padding: 0;
   margin: auto;
   width: 33vh;
@@ -29,74 +29,32 @@ body {
 }
 .cell,
 .empty {
-  // flex-grow: 1;
-  // flex-shrink: 1;
-  // flex-basis: 7.25vh;
-  border: 0;
-  font-size: 3.5vh;
-  margin: 0.5vh;
-  padding: 0;
-  height: 6vh;
-  width: 7.25vh;
+  // font-size: 3.5vh;
+  // margin: 0.5vh;
+  // padding: 0;
+  // height: 6vh;
+  // width: 7.25vh;
   // line-height: 5vh;
-  line-height: 200px;
+  // line-height: 200px;
+  line-height: inherit;
   vertical-align: middle;
   text-shadow: rgba(255, 255, 255, 0.7) 1px 1px 1px, #fff -1px -1px 1px, #fff -1px 1px 1px, #fff 1px -1px 1px;
-  // background: #fff;
   text-align: center;
-  border-radius: 3px;
-  cursor: pointer;
-  // float: left;
-}
-.empty {
-  background: transparent;
-  border: 3px dashed grey;
-  // color: transparent;
-  // transition: border 80ms linear;
-}
-
-.autoWin {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 7.25vh;
-  border: 0;
-  font-size: 3.5vh;
-  margin: 0.5vh;
-  padding: 0;
-  line-height: 5vh;
-  vertical-align: middle;
-  background: #fff;
-  text-align: center;
-  border-radius: 3px;
   cursor: pointer;
 }
 
-// dragNdrop classes
 
-.fill {
-  background-image: url('https://source.unsplash.com/random/150x150');
-  position: relative;
-  height: 150px;
-  width: 150px;
-  top: 5px;
-  left: 5px;
-  cursor: pointer;
+
+// popup styles
+.popup {
+  display: none;
 }
-
-.hold {
-  border: solid 5px #ccc;
+.active {
+  display: block;
 }
+.open{
 
-// .empty {
-//   display: inline-block;
-//   height: 160px;
-//   width: 160px;
-//   margin: 10px;
-//   border: solid 3px salmon;
-//   background: white;
-// }
+}
+.blur{
 
-.hovered {
-  background: #f4f4f4;
-  border-style: dashed;
 }

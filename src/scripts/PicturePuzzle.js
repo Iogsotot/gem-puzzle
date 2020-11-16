@@ -7,6 +7,11 @@ export default class PicturePuzzle {
     this.imageSrc = imageSrc;
     this.width = width;
     this.cells = [];
+    this.shuffling = false;
+    this.moveCounts = 0;
+
+    this.onFinished = () => {};
+    this.onSwap = () => {};
 
     this.init();
     const img = new Image();
@@ -15,13 +20,13 @@ export default class PicturePuzzle {
       this.height = (img.height * this.width) / img.width;
       this.el.style.width = `${this.width}px`;
       this.el.style.height = `${this.height}px`;
-
       this.setup();
     };
     img.src = this.imageSrc;
   }
 
   init() {
+    this.parentEl.innerHTML = '';
     this.el = this.createWrapper();
     this.parentEl.appendChild(this.el);
   }
@@ -40,21 +45,49 @@ export default class PicturePuzzle {
       this.cells.push(new Cell(this, i));
     }
     this.shuffle();
-    console.log(this.cells);
+    // console.log(this.cells);
   }
 
   // true shuffle
   shuffle() {
-    let j;
-    let temp;
+    this.shuffling = true;
     for (let i = this.cells.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = this.cells[j];
-      this.cells[j] = this.cells[i];
-      this.cells[i] = temp;
-      this.cells[i].setPosition(i);
-      this.cells[j].setPosition(j);
+      const j = Math.floor(Math.random() * (i + 1));
+      this.swapCells(i, j);
     }
-    return this.cells;
+    this.shuffling = false;
+  }
+
+  swapCells(i, j, animate) {
+    this.cells[i].setPosition(j, animate, i);
+    this.cells[j].setPosition(i);
+    [this.cells[i], this.cells[j]] = [this.cells[j], this.cells[i]];
+    if (!this.shuffling && this.isAssembled()) {
+      if (this.onFinished && typeof this.onFinished === 'function') {
+        this.onFinished.call(this);
+      }
+    }
+  }
+
+  isAssembled() {
+    for (let i = 0; i < this.cells.length; i++) {
+      if (i !== this.cells[i].index) {
+        if (i === 6 && this.cells[i].index === 8 && this.cells[i + 1].index === i + 1) {
+          return true;
+        }
+        return false;
+      }
+    }
+    return true;
+  }
+
+  findPosition(index) {
+    return this.cells.findIndex((cell) => cell.index === index);
+  }
+
+  findEmpty() {
+    return this.cells.findIndex((cell) => cell.isEmpty);
   }
 }
+
+window.PicturePuzzle = window.PicturePuzzle || PicturePuzzle;

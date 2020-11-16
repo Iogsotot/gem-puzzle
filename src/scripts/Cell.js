@@ -1,16 +1,21 @@
 export default class Cell {
   constructor(puzzle, index) {
+    this.isEmpty = false;
     this.index = index;
     this.puzzle = puzzle;
     this.width = this.puzzle.width / this.puzzle.boardSize;
     this.height = this.puzzle.height / this.puzzle.boardSize;
-    //
+    // maxCell = empty cell
     this.maxCell = this.puzzle.boardSize * this.puzzle.boardSize - 1;
     this.el = this.createDiv();
     puzzle.el.appendChild(this.el);
 
-    if (this.index === this.maxCell) return;
+    if (this.index === this.maxCell) {
+      this.isEmpty = true;
+      return;
+    }
     this.setImage();
+    this.setPosition(this.index);
   }
 
   createDiv() {
@@ -19,23 +24,35 @@ export default class Cell {
     // set number to cell
     if (this.index !== this.maxCell) div.innerHTML = `${this.index + 1}`;
     //
-    // div.style.backgroundImage = `url(${this.puzzle.imageSrc})`;
     div.style.backgroundSize = `${this.puzzle.width}px ${this.puzzle.height}px`;
     div.style.position = 'absolute';
-    div.style.width = `${this.width}px`;
-    div.style.height = `${this.height}px`;
-    div.style.border = '4px solid wheat';
+    div.style.width = `${this.width - 5}px`;
+    div.style.height = `${this.height - 5}px`;
 
     div.onclick = () => {
+      const currentCellIndex = this.puzzle.findPosition(this.index);
+      const emptyCellIndex = this.puzzle.findEmpty();
+      const { x, y } = this.getXY(currentCellIndex);
+      const { x: emptyX, y: emptyY } = this.getXY(emptyCellIndex);
 
+      if ((x === emptyX || y === emptyY)
+        && (Math.abs(x - emptyX) === 1 || Math.abs(y - emptyY) === 1)) {
+        // console.log("I can swap");
+        this.puzzle.numberOfMovements += 1;
+        if (this.puzzle.onSwap && typeof this.puzzle.onSwap === 'function') {
+          this.puzzle.onSwap(this.puzzle.numberOfMovements);
+        }
+        this.puzzle.swapCells(currentCellIndex, emptyCellIndex, true);
+      }
     };
 
     return div;
   }
 
   setImage() {
-    const left = this.width * (this.index % this.puzzle.boardSize);
-    const top = this.height * (Math.floor(this.index / this.puzzle.boardSize));
+    const { x, y } = this.getXY(this.index);
+    const left = this.width * x;
+    const top = this.height * y;
     this.el.style.backgroundImage = `url(${this.puzzle.imageSrc})`;
     this.el.style.backgroundPosition = `-${left}px -${top}px`;
   }
@@ -48,9 +65,17 @@ export default class Cell {
   }
 
   getPositionFromIndex(index) {
+    const { x, y } = this.getXY(index);
     return {
-      left: this.width * (index % this.puzzle.boardSize),
-      top: this.height * (Math.floor(index / this.puzzle.boardSize)),
+      left: this.width * x,
+      top: this.height * y,
+    };
+  }
+
+  getXY(index) {
+    return {
+      x: index % this.puzzle.boardSize,
+      y: Math.floor(index / this.puzzle.boardSize),
     };
   }
 }
