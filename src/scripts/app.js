@@ -1,4 +1,5 @@
-// import '../styles/style.scss';
+import '../styles/style.scss';
+// import '1.jpg' from './assets/imgs/1.jpg';
 import PicturePuzzle from './PicturePuzzle.js';
 import { createBoardSizeEl, createNewGame, createNextImgBtn } from './Options.js';
 import addPopup from './Popup.js';
