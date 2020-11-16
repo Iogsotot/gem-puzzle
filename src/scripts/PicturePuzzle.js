@@ -1,10 +1,10 @@
 import Cell from './Cell.js';
 
 export default class PicturePuzzle {
-  constructor(el, imageSrc, width, size = 3) {
+  constructor(el, currentImg, width, size = 3) {
     this.parentEl = el;
     this.boardSize = size;
-    this.imageSrc = imageSrc;
+    this.imageSrc = currentImg;
     this.width = width;
     this.cells = [];
     this.shuffling = false;
@@ -18,8 +18,8 @@ export default class PicturePuzzle {
     img.onload = () => {
       console.log(img.width, img.height);
       this.height = (img.height * this.width) / img.width;
-      this.el.style.width = `${this.width}px`;
-      this.el.style.height = `${this.height}px`;
+      this.el.style.width = `${this.width / 10}rem`;
+      this.el.style.height = `${this.height / 10}rem`;
       this.setup();
     };
     img.src = this.imageSrc;
@@ -58,26 +58,25 @@ export default class PicturePuzzle {
     this.shuffling = false;
   }
 
-  getPossiblesForCell(i) {
-    const currentCellIndex = this.findPosition(this.index);
-    const emptyCellIndex = this.findEmpty();
-    const { x, y } = this.getXY(currentCellIndex);
-    const { x: emptyX, y: emptyY } = this.getXY(emptyCellIndex);
+  // getPossiblesForCell(i) {
+  //   const currentCellIndex = this.findPosition(this.index);
+  //   const emptyCellIndex = this.findEmpty();
+  //   const { x, y } = this.getXY(currentCellIndex);
+  //   const { x: emptyX, y: emptyY } = this.getXY(emptyCellIndex);
 
-    if ((x === emptyX || y === emptyY)
-        && (Math.abs(x - emptyX) === 1 || Math.abs(y - emptyY) === 1)) {
-          
-        }
-  }
+  //   if ((x === emptyX || y === emptyY)
+  //       && (Math.abs(x - emptyX) === 1 || Math.abs(y - emptyY) === 1)) {
+  //       }
+  // }
 
-  controlledShuffle() {
-    this.shuffling = true;
-    for (let i = this.permutations; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      this.swapCells(i, j);
-    }
-    this.shuffling = false;
-  }
+  // controlledShuffle() {
+  //   this.shuffling = true;
+  //   for (let i = this.permutations; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     this.swapCells(i, j);
+  //   }
+  //   this.shuffling = false;
+  // }
 
   swapCells(i, j, animate) {
     this.cells[i].setPosition(j, animate, i);
@@ -88,7 +87,7 @@ export default class PicturePuzzle {
         this.onFinished.call(this);
       }
     }
-    console.log(this.cells);
+    // console.log(this.cells);
   }
 
   isAssembled() {

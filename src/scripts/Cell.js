@@ -24,10 +24,12 @@ export default class Cell {
     // set number to cell
     if (this.index !== this.maxCell) div.innerHTML = `${this.index + 1}`;
     //
-    div.style.backgroundSize = `${this.puzzle.width}px ${this.puzzle.height}px`;
+    div.style.backgroundSize = `${this.puzzle.width / 10}rem ${this.puzzle.height / 10}rem`;
     div.style.position = 'absolute';
-    div.style.width = `${this.width - 5}px`;
-    div.style.height = `${this.height - 5}px`;
+    div.style.width = `${this.width / 10 - 0.5}rem`;
+    div.style.height = `${this.height / 10 - 0.5}rem`;
+    div.style.lineHeight = `${this.height / 10 - 0.5}rem`;
+    div.style.fontSize = `${this.height / 30}rem`;
 
     div.onclick = () => {
       const currentCellIndex = this.puzzle.findPosition(this.index);

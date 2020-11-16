@@ -12,27 +12,11 @@ body {
   padding: 0;
   margin: 0;
   padding-top: 8vh;
-  background: wheat;
+  background: #faefdd;
   color: #111;
   text-align: center;
-}
-
-.txt {
-  color: #fff;
-  text-align: center;
-  font-size: 5vh;
-}
-
-.board {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  padding: 0;
-  margin: auto;
-  width: 33vh;
-  height: 33vh;
+  font-size: 10px;
+  font-family: 'Georgia', Georgia, 'Times New Roman', Times, serif;
 }
 
 .cell,
@@ -44,11 +28,91 @@ body {
   cursor: pointer;
 }
 
+.btn {
+  margin: 0.5rem 0.5rem 2rem;
+  padding: 0.5rem;
+  border: 3px solid #F1CDB3;
+  border-radius: 3rem;
+  background-color: #FDDCC4;
+  text-align: center;
+  color: #292929;
+  font-size: 1.7rem;
+  line-height: 130%;
+  letter-spacing: 0.06rem;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: all 250ms linear;
+  transition: all 250ms linear;
+}
+
+.btn:hover {
+  background-color: #F1CDB3;
+  border-color: #F1CDB3;
+  -webkit-transition: all 250ms linear;
+  transition: all 250ms linear;
+}
+
+.board_size {
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 2rem;
+  border: 3px solid #F1CDB3;
+  border-radius: 1.5rem;
+  background-color: blanchedalmond;
+}
+
+.board_size:hover {
+  background-color: #fff;
+}
+
+.board_size__label {
+  font-size: 2rem;
+  margin-right: 2rem;
+}
+
+.popup_wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: rgba(19, 19, 19, 0.51);
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.popup_wrapper.open {
+  opacity: 1;
+  visibility: visible;
+}
+
 .popup {
-  display: none;
+  margin: 50% 0 0 -200px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  background-color: #FDDCC4;
+}
+
+.icon--close {
+  font-size: 2.5rem;
+  display: block;
+  float: right;
+  color: #f6f6f6;
 }
 
 .active {
   display: block;
+}
+
+.blur {
+  -webkit-filter: blur(4px);
+          filter: blur(4px);
 }
 /*# sourceMappingURL=style.css.map */

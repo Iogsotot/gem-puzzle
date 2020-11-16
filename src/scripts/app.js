@@ -1,6 +1,6 @@
 // import '../styles/style.scss';
 import PicturePuzzle from './PicturePuzzle.js';
-import { createBoardSizeEl, createNewGame } from './Options.js';
+import { createBoardSizeEl, createNewGame, createNextImgBtn } from './Options.js';
 import addPopup from './Popup.js';
 
 // wrapper
@@ -16,8 +16,14 @@ const wrapper = document.querySelector('.wrapper');
 const boardSize = createBoardSizeEl();
 wrapper.innerHTML += boardSize;
 
+// new game button
 const newGameBtn = createNewGame();
 wrapper.innerHTML += newGameBtn;
+
+// next image button
+const nextImageBtn = createNextImgBtn();
+wrapper.innerHTML += nextImageBtn;
+
 const boardWrapperTemplate = `
   <div class="board-wrapper"></div>
   `;
@@ -31,6 +37,22 @@ const popup = document.querySelector('.popup');
 const newGameEl = document.querySelector('.btn--start');
 newGameEl.addEventListener('click', newGame);
 //
+let currentImg = 1;
+const nextImageBtnEl = document.querySelector('.btn--next');
+function getImgSrc(someImg) {
+  const src = `./assets/imgs/${someImg}.jpg`;
+  if (someImg > 150) {
+    // eslint-disable-next-line no-param-reassign
+    someImg = 1;
+    currentImg = 1;
+    return `./assets/imgs/${1}.jpg`;
+  }
+  return src;
+}
+let currentImgSrc = getImgSrc(currentImg);
+nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc = getImgSrc(currentImg); newGame(); console.log(currentImg, currentImgSrc); });
+// console.log(currentImgSrc);
+//
 //
 // constructor(el, imageSrc, width, size)
 function newGame() {
@@ -38,13 +60,15 @@ function newGame() {
   const sizeEl = document.querySelector('.board_size');
   const picturePuzzle = new PicturePuzzle(
     document.querySelector('.board-wrapper'),
-    './assets/imgs/1.jpg',
+    currentImgSrc,
     600,
     sizeEl.value,
   );
+  // eslint-disable-next-line func-names
   picturePuzzle.onSwap = function (numberOfMovements) {
     console.log(numberOfMovements);
   };
+  // eslint-disable-next-line func-names
   picturePuzzle.onFinished = function () {
     setTimeout(() => {
       popup.classList.add('active');
