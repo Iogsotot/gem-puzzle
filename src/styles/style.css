@@ -9,9 +9,18 @@
 
 html,
 body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  width: 100%;
   padding: 0;
   margin: 0;
-  padding-top: 8vh;
+  padding-top: 6vh;
   background: #faefdd;
   color: #111;
   text-align: center;
@@ -90,10 +99,7 @@ body {
 }
 
 .popup {
-  margin: 50% 0 0 -200px;
   position: relative;
-  top: 50%;
-  left: 50%;
   opacity: 0;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
@@ -114,5 +120,51 @@ body {
 .blur {
   -webkit-filter: blur(4px);
           filter: blur(4px);
+}
+
+.board-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  max-width: 60rem;
+}
+
+@media (max-width: 620px) {
+  body {
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+}
+
+@media (max-width: 570px) {
+  body {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  .board_size__label, .board_size, .btn {
+    font-size: 2.3rem;
+    margin: 1rem;
+  }
+  .board-wrapper {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+}
+
+@media (max-width: 430px) {
+  .board-wrapper {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+  }
+  .wrapper {
+    width: unset;
+  }
+}
+
+@media (max-width: 350px) {
+  .wrapper {
+    width: unset;
+  }
 }
 /*# sourceMappingURL=style.css.map */

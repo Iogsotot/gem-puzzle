@@ -19,9 +19,13 @@ $color-disabled: #CDCDCD;
 
 html,
 body {
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+  width: 100%;
   padding: 0;
   margin: 0;
-  padding-top: 8vh;
+  padding-top: 6vh;
   // background: wheat;
   background: $color-medium;
   color: #111;
@@ -29,6 +33,8 @@ body {
   font-size: 10px;
   font-family: 'Georgia', Georgia, 'Times New Roman', Times, serif;
 }
+
+
 
 .cell,
 .empty {
@@ -100,10 +106,10 @@ body {
 }
 .popup {
   // display: none;
-  margin: 50% 0 0 -200px;
+  // margin: 50% 0 0 -200px;
   position: relative;
-  top: 50%;
-  left: 50%;
+  // top: 50%;
+  // left: 50%;
   opacity: 0;
   transition: all 0.5s ease-in-out;
   background-color: $primary-color--light;
@@ -122,4 +128,44 @@ body {
 }
 .blur{
   filter: blur(4px);
+}
+
+.board-wrapper {
+  display: flex;
+  margin: 0 auto;
+  max-width: 60rem;
+}
+
+@media (max-width: 620px) {
+  body {
+    transform: scale(0.8);
+  }
+}
+@media (max-width: 570px) {
+  body {
+    transform: scale(0.7);
+  }
+  .board_size__label, .board_size, .btn {
+    font-size: 2.3rem;
+    margin: 1rem;
+  }
+  .board-wrapper {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 430px) { 
+  .board-wrapper {
+    // max-width: 60rem;
+    transform: scale(0.7);
+  }
+  .wrapper {
+    width: unset;
+  }
+}
+
+@media (max-width: 350px) { 
+  .wrapper {
+    width: unset
+  }
 }
