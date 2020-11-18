@@ -116,5 +116,15 @@ function newGame() {
   return picturePuzzle;
 }
 
+const btnToggle = document.querySelector('.btn--toggle');
+btnToggle.addEventListener('click', () => {
+  btnToggle.classList.toggle('turn');
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach((cell) => {
+    // eslint-disable-next-line no-param-reassign
+    cell.classList.toggle('hide');
+  });
+});
+
 // run
 newGame();

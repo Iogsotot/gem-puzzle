@@ -141,6 +141,25 @@ body {
   margin: 0.5rem;
 }
 
+.btn--toggle {
+  background-color: rgb(135, 241, 135);
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border-color: green;
+}
+.btn--toggle:hover {
+  background-color: rgb(135, 241, 135);
+  border-color: green;
+}
+
+.btn--toggle.turn {
+  background-color: red;
+  border-color: darkred;
+}
+.cell.hide {
+  font-size: 0 !important;
+}
+
 @media (max-width: 620px) {
   body {
     transform: scale(0.8);
