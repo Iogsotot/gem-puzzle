@@ -27,12 +27,14 @@ wrapper.innerHTML += boardWrapperTemplate;
 //
 // create popup
 addPopup();
-const popup = document.querySelector('.popup');
+const popup = document.querySelector('.popup_wrapper');
 // add audion on page
 audio();
 // new game onclick
 const newGameEl = document.querySelector('.btn--start');
 newGameEl.addEventListener('click', newGame);
+const closeIcon = document.querySelector('.icon--close');
+closeIcon.addEventListener('click', newGame);
 //
 // change img onclick
 let currentImg = 1;
@@ -85,7 +87,7 @@ function newGame() {
   //
   const movesEl = document.querySelector('.moves');
   movesEl.innerText = 0;
-  popup.classList.remove('active');
+  popup.classList.remove('open');
   const sizeEl = document.querySelector('.board_size');
   const picturePuzzle = new PicturePuzzle(
     document.querySelector('.board-wrapper'),

@@ -10,10 +10,13 @@ export default function addPopup() {
   const popup = `
   <div class="popup_wrapper">
     <div class="popup">
-      <div class"icon--close">close</div>
-      Congratulation! You are winner!
-      <div>Your time: ${hours}h:${mins}m:${secs}s</div>
-      <div>Steps: ${clickCount}</div>  
+      <div class="icon--close">close</div>
+      <p>Congratulation!</p> 
+      <p>You are winner! </p>
+      <div class="popup-info">
+        <div>Your time: ${hours}:${mins}:${secs}</div>
+        <div>Steps: ${clickCount}</div>
+      </div>  
     </div>
   </div>  
   `;
