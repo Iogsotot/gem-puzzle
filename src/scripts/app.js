@@ -56,25 +56,33 @@ nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc 
 function newGame() {
   // timer exist - in first call
   const time = document.querySelector('.time');
-  const existDate = new Date();
-  const existHour = existDate.getHours();
-  const existMin = existDate.getMinutes();
-  const existSec = existDate.getSeconds();
-  function timer(anyHour, anyMin, anySec) {
-    const today = new Date();
-    const hour = today.getHours();
-    const min = today.getMinutes();
-    const sec = today.getSeconds();
-    const timerHour = hour - anyHour;
-    const timerMin = min - anyMin;
-    const timerSec = sec - anySec;
-    time.innerHTML = `${addZero(timerHour)}<span>:</span>${addZero(timerMin)}<span>:</span>${addZero(timerSec)}`;
+  let hour = 0;
+  let min = 0;
+  let sec = 0;
+  function timer() {
+    sec += 1;
+    if (sec > 59) {
+      sec = 0;
+      min += 1;
+    }
+    if (min > 59) {
+      min = 0;
+      hour += 1;
+    }
+    time.innerHTML = `${addZero(hour)}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
   }
   function updateTime() {
-    timer(existHour, existMin, existSec);
+    timer();
     setTimeout(updateTime, 1000);
   }
+  // Add Zeros
+  function addZero(n) {
+    return (parseInt(n, 10) < 10 ? '0' : '') + n;
+  }
   updateTime();
+  //
+  //
+  //
   const movesEl = document.querySelector('.moves');
   movesEl.innerText = 0;
   popup.classList.remove('active');
@@ -106,11 +114,6 @@ function newGame() {
     // };
   };
   return picturePuzzle;
-}
-
-// Add Zeros
-function addZero(n) {
-  return (parseInt(n, 10) < 10 ? '0' : '') + n;
 }
 
 // run
