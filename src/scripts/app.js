@@ -26,7 +26,7 @@ wrapper.innerHTML += boardWrapperTemplate;
 //
 //
 // add audion on page
-audio();
+const audioEl = audio();
 // new game onclick
 const newGameEl = document.querySelector('.btn--start');
 newGameEl.addEventListener('click', newGame);
@@ -103,6 +103,7 @@ function newGame() {
     // eslint-disable-next-line no-shadow
     const movesEl = document.querySelector('.moves');
     movesEl.innerText = moveCounts;
+    audioEl.play();
     console.log(movesEl.innerText);
   };
   // eslint-disable-next-line func-names
