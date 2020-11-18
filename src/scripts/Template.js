@@ -36,12 +36,12 @@ export default function createTemplate() {
           Steps: <span class="moves">0</span>
         </div>
         <div class="time-count txt">
-          Time: <span class="times">00:00</span>
+          Time: <span class="time"><span class="min">00</span>:<span class="sec">00</span></span>
         </div>
       </div>
 
     </div>
   </div>
-  `
+  `;
   return TEMPLATE;
 }

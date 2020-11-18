@@ -54,6 +54,27 @@ nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc 
 //
 // constructor(el, imageSrc, width, size)
 function newGame() {
+  // timer exist - in first call
+  const time = document.querySelector('.time');
+  const existDate = new Date();
+  const existHour = existDate.getHours();
+  const existMin = existDate.getMinutes();
+  const existSec = existDate.getSeconds();
+  function timer(anyHour, anyMin, anySec) {
+    const today = new Date();
+    const hour = today.getHours();
+    const min = today.getMinutes();
+    const sec = today.getSeconds();
+    const timerHour = hour - anyHour;
+    const timerMin = min - anyMin;
+    const timerSec = sec - anySec;
+    time.innerHTML = `${addZero(timerHour)}<span>:</span>${addZero(timerMin)}<span>:</span>${addZero(timerSec)}`;
+  }
+  function updateTime() {
+    timer(existHour, existMin, existSec);
+    setTimeout(updateTime, 1000);
+  }
+  updateTime();
   const movesEl = document.querySelector('.moves');
   movesEl.innerText = 0;
   popup.classList.remove('active');
@@ -65,11 +86,9 @@ function newGame() {
     sizeEl.value,
   );
 
-  // // add move count element
-  // const moveCountEl = createMoveCountEl();
-  // wrapper.innerHTML += moveCountEl;
   // eslint-disable-next-line func-names
   picturePuzzle.onSwap = function (moveCounts) {
+    // eslint-disable-next-line no-shadow
     const movesEl = document.querySelector('.moves');
     movesEl.innerText = moveCounts;
     console.log(movesEl.innerText);
@@ -87,6 +106,11 @@ function newGame() {
     // };
   };
   return picturePuzzle;
+}
+
+// Add Zeros
+function addZero(n) {
+  return (parseInt(n, 10) < 10 ? '0' : '') + n;
 }
 
 // run
