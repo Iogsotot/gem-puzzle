@@ -1,7 +1,7 @@
 // import '../styles/style.scss';
 // import '1.jpg' from './assets/imgs/1.jpg';
 import PicturePuzzle from './PicturePuzzle.js';
-import { createBoardSizeEl, createNewGame, createNextImgBtn } from './Options.js';
+import createTemplate from './Template.js';
 import addPopup from './Popup.js';
 import audio from './Audio.js';
 
@@ -14,17 +14,10 @@ function addWrapper() {
 }
 window.onload = addWrapper();
 
+// add all HTML (except board)
 const wrapper = document.querySelector('.wrapper');
-const boardSize = createBoardSizeEl();
-wrapper.innerHTML += boardSize;
-
-// new game button
-const newGameBtn = createNewGame();
-wrapper.innerHTML += newGameBtn;
-
-// next image button
-const nextImageBtn = createNextImgBtn();
-wrapper.innerHTML += nextImageBtn;
+const HTMLTemplate = createTemplate();
+wrapper.innerHTML += HTMLTemplate;
 
 const boardWrapperTemplate = `
   <div class="board-wrapper"></div>
@@ -61,6 +54,8 @@ nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc 
 //
 // constructor(el, imageSrc, width, size)
 function newGame() {
+  const movesEl = document.querySelector('.moves');
+  movesEl.innerText = 0;
   popup.classList.remove('active');
   const sizeEl = document.querySelector('.board_size');
   const picturePuzzle = new PicturePuzzle(
@@ -69,9 +64,15 @@ function newGame() {
     600,
     sizeEl.value,
   );
+
+  // // add move count element
+  // const moveCountEl = createMoveCountEl();
+  // wrapper.innerHTML += moveCountEl;
   // eslint-disable-next-line func-names
-  picturePuzzle.onSwap = function (moveCount) {
-    console.log(moveCount);
+  picturePuzzle.onSwap = function (moveCounts) {
+    const movesEl = document.querySelector('.moves');
+    movesEl.innerText = moveCounts;
+    console.log(movesEl.innerText);
   };
   // eslint-disable-next-line func-names
   picturePuzzle.onFinished = function () {

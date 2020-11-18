@@ -40,9 +40,9 @@ export default class Cell {
       if ((x === emptyX || y === emptyY)
         && (Math.abs(x - emptyX) === 1 || Math.abs(y - emptyY) === 1)) {
         // console.log("I can swap");
-        this.puzzle.moveCount += 1;
+        this.puzzle.moveCounts += 1;
         if (this.puzzle.onSwap && typeof this.puzzle.onSwap === 'function') {
-          this.puzzle.onSwap(this.puzzle.moveCount);
+          this.puzzle.onSwap(this.puzzle.moveCounts);
         }
         this.puzzle.swapCells(currentCellIndex, emptyCellIndex, true);
       }
