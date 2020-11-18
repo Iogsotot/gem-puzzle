@@ -2,10 +2,10 @@
 // import totalTime from '';
 
 export default function addPopup(data) {
-  const hours = data.hours;
-  const mins = data.mins;
-  const secs = data.secs;
-  const clickCount = data.clickCount;
+  const { hours } = data;
+  const { mins } = data;
+  const { secs } = data;
+  const { clickCount } = data;
   const popup = `
   <div class="popup_wrapper">
     <div class="popup">
