@@ -1,12 +1,11 @@
 // import moveCounts from './app.js';
 // import totalTime from '';
 
-const hours = '##';
-const mins = '##';
-const secs = '##';
-const clickCount = 'N';
-
-export default function addPopup() {
+export default function addPopup(data) {
+  const hours = data.hours;
+  const mins = data.mins;
+  const secs = data.secs;
+  const clickCount = data.clickCount;
   const popup = `
   <div class="popup_wrapper">
     <div class="popup">

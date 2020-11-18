@@ -25,16 +25,11 @@ const boardWrapperTemplate = `
 wrapper.innerHTML += boardWrapperTemplate;
 //
 //
-// create popup
-addPopup();
-const popup = document.querySelector('.popup_wrapper');
 // add audion on page
 audio();
 // new game onclick
 const newGameEl = document.querySelector('.btn--start');
 newGameEl.addEventListener('click', newGame);
-const closeIcon = document.querySelector('.icon--close');
-closeIcon.addEventListener('click', newGame);
 //
 // change img onclick
 let currentImg = 1;
@@ -56,12 +51,15 @@ nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc 
 //
 // constructor(el, imageSrc, width, size)
 let timeoutTimer = null;
+let hour;
+let min;
+let sec;
 function newGame() {
   // timer exist - in first call
   const time = document.querySelector('.time');
-  let hour = 0;
-  let min = 0;
-  let sec = 0;
+  hour = 0;
+  min = 0;
+  sec = 0;
   if (timeoutTimer) {
     clearTimeout(timeoutTimer);
     timeoutTimer = null;
@@ -92,7 +90,6 @@ function newGame() {
   //
   const movesEl = document.querySelector('.moves');
   movesEl.innerText = 0;
-  popup.classList.remove('open');
   const sizeEl = document.querySelector('.board_size');
   const picturePuzzle = new PicturePuzzle(
     document.querySelector('.board-wrapper'),
@@ -110,6 +107,16 @@ function newGame() {
   };
   // eslint-disable-next-line func-names
   picturePuzzle.onFinished = function () {
+    // create popup
+    addPopup({
+      hours: addZero(hour), mins: addZero(min), secs: addZero(sec), clickCount: movesEl.innerText,
+    });
+    const popup = document.querySelector('.popup_wrapper');
+    const closeIcon = document.querySelector('.icon--close');
+    closeIcon.addEventListener('click', () => {
+      popup.classList.remove('open');
+      newGame();
+    });
     setTimeout(() => {
       popup.classList.add('active');
       popup.classList.add('open');
