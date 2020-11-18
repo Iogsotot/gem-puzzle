@@ -35,6 +35,8 @@ body {
   text-shadow: rgba(255, 255, 255, 0.7) 1px 1px 1px, #fff -1px -1px 1px, #fff -1px 1px 1px, #fff 1px -1px 1px;
   text-align: center;
   cursor: pointer;
+  -webkit-transition: font-size 0s linear;
+  transition: font-size 0s linear;
 }
 
 .btn {
@@ -155,6 +157,8 @@ body {
 
 .cell.hide {
   font-size: 0 !important;
+  -webkit-transition: font-size 0s linear;
+  transition: font-size 0s linear;
 }
 
 @media (max-width: 620px) {
