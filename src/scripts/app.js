@@ -55,12 +55,17 @@ nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc 
 //
 //
 // constructor(el, imageSrc, width, size)
+let timeoutTimer = null;
 function newGame() {
   // timer exist - in first call
   const time = document.querySelector('.time');
   let hour = 0;
   let min = 0;
   let sec = 0;
+  if (timeoutTimer) {
+    clearTimeout(timeoutTimer);
+    timeoutTimer = null;
+  }
   function timer() {
     sec += 1;
     if (sec > 59) {
@@ -75,7 +80,7 @@ function newGame() {
   }
   function updateTime() {
     timer();
-    setTimeout(updateTime, 1000);
+    timeoutTimer = setTimeout(updateTime, 1000);
   }
   // Add Zeros
   function addZero(n) {

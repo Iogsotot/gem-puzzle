@@ -1,10 +1,10 @@
 // import moveCounts from './app.js';
 // import totalTime from '';
 
-const hours = 0;
-const mins = 0;
-const secs = 0;
-const clickCount = 0;
+const hours = '##';
+const mins = '##';
+const secs = '##';
+const clickCount = 'N';
 
 export default function addPopup() {
   const popup = `
