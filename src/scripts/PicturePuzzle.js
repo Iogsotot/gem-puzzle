@@ -1,5 +1,6 @@
 import Cell from './Cell.js';
 
+const audio = document.querySelector('audio');
 export default class PicturePuzzle {
   constructor(el, currentImg, width, size = 3) {
     this.parentEl = el;
@@ -9,6 +10,8 @@ export default class PicturePuzzle {
     this.cells = [];
     this.shuffling = false;
     this.moveCounts = 0;
+    this.soundEnabled = true;
+    this.audio = audio;
 
     this.onFinished = () => {};
     this.onSwap = () => {};
@@ -108,6 +111,11 @@ export default class PicturePuzzle {
 
   findEmpty() {
     return this.cells.findIndex((cell) => cell.isEmpty);
+  }
+
+  changeSoundSetting() {
+    if (this.soundEnabled) this.soundEnabled = false;
+    else this.soundEnabled = true;
   }
 }
 

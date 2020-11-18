@@ -40,9 +40,9 @@ export default class Cell {
       if ((x === emptyX || y === emptyY)
         && (Math.abs(x - emptyX) === 1 || Math.abs(y - emptyY) === 1)) {
         // console.log("I can swap");
-        this.puzzle.numberOfMovements += 1;
+        this.puzzle.moveCount += 1;
         if (this.puzzle.onSwap && typeof this.puzzle.onSwap === 'function') {
-          this.puzzle.onSwap(this.puzzle.numberOfMovements);
+          this.puzzle.onSwap(this.puzzle.moveCount);
         }
         this.puzzle.swapCells(currentCellIndex, emptyCellIndex, true);
       }
@@ -56,14 +56,14 @@ export default class Cell {
     const left = this.width * x;
     const top = this.height * y;
     this.el.style.backgroundImage = `url(${this.puzzle.imageSrc})`;
-    this.el.style.backgroundPosition = `-${left}px -${top}px`;
+    this.el.style.backgroundPosition = `-${left / 10}rem -${top / 10}rem`;
   }
 
   setPosition(index) {
     const { left, top } = this.getPositionFromIndex(index);
 
-    this.el.style.left = `${left}px`;
-    this.el.style.top = `${top}px`;
+    this.el.style.left = `${left / 10}rem`;
+    this.el.style.top = `${top / 10}rem`;
   }
 
   getPositionFromIndex(index) {

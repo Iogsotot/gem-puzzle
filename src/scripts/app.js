@@ -3,6 +3,7 @@
 import PicturePuzzle from './PicturePuzzle.js';
 import { createBoardSizeEl, createNewGame, createNextImgBtn } from './Options.js';
 import addPopup from './Popup.js';
+import audio from './Audio.js';
 
 // wrapper
 function addWrapper() {
@@ -34,10 +35,13 @@ wrapper.innerHTML += boardWrapperTemplate;
 // create popup
 addPopup();
 const popup = document.querySelector('.popup');
-
+// add audion on page
+audio();
+// new game onclick
 const newGameEl = document.querySelector('.btn--start');
 newGameEl.addEventListener('click', newGame);
 //
+// change img onclick
 let currentImg = 1;
 const nextImageBtnEl = document.querySelector('.btn--next');
 function getImgSrc(someImg) {
@@ -66,8 +70,8 @@ function newGame() {
     sizeEl.value,
   );
   // eslint-disable-next-line func-names
-  picturePuzzle.onSwap = function (numberOfMovements) {
-    console.log(numberOfMovements);
+  picturePuzzle.onSwap = function (moveCount) {
+    console.log(moveCount);
   };
   // eslint-disable-next-line func-names
   picturePuzzle.onFinished = function () {
@@ -76,10 +80,10 @@ function newGame() {
       popup.classList.add('open');
       this.el.classList.add('blur');
     }, 700);
-    popup.querySelector('.icon--close').onclick = () => {
-      popup.classList.remove('open');
-      this.el.classList.remove('blur');
-    };
+    // popup.querySelector('.icon--close').onclick = () => {
+    //   popup.classList.remove('open');
+    //   this.el.classList.remove('blur');
+    // };
   };
   return picturePuzzle;
 }
