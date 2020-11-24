@@ -19,7 +19,7 @@ export default class PicturePuzzle {
     this.init();
     const img = new Image();
     img.onload = () => {
-      console.log(img.width, img.height);
+      // console.log(img.width, img.height);
       this.height = (img.height * this.width) / img.width;
       this.el.style.width = `${this.width / 10}rem`;
       this.el.style.height = `${this.height / 10}rem`;

@@ -45,7 +45,7 @@ function getImgSrc(someImg) {
   return src;
 }
 let currentImgSrc = getImgSrc(currentImg);
-nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc = getImgSrc(currentImg); newGame(); console.log(currentImg, currentImgSrc); });
+nextImageBtnEl.addEventListener('click', () => { currentImg += 1; currentImgSrc = getImgSrc(currentImg); newGame(); });
 // console.log(currentImgSrc);
 //
 //
@@ -104,7 +104,7 @@ function newGame() {
     const movesEl = document.querySelector('.moves');
     movesEl.innerText = moveCounts;
     audioEl.play();
-    console.log(movesEl.innerText);
+    // console.log(movesEl.innerText);
   };
   // eslint-disable-next-line func-names
   picturePuzzle.onFinished = function () {
@@ -143,3 +143,11 @@ btnToggle.addEventListener('click', () => {
 
 // run
 newGame();
+
+// ГРЯЗЬ: (проверяющий нашёл какой-то баг с аудио (error в консоль сыпется 'uncaught promise'),
+// а я не могу его воспроизвести и пофиксить)
+const debug = 1;
+// eslint-disable-next-line func-names
+const logger = function (a, b) { if (debug === 1) console.log(a, b || ''); };
+
+logger('');
